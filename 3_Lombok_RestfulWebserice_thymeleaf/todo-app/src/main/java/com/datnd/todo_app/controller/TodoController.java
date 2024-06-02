@@ -1,4 +1,4 @@
-package com.datnd.todo_app;
+package com.datnd.todo_app.controller;
 
 import java.util.List;
 
@@ -7,25 +7,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import com.datnd.todo_app.entity.Todo;
+import com.datnd.todo_app.service.TodoService;
 import jakarta.servlet.http.HttpServletRequest;
 
-
 @Controller
-public class MainController {
+public class TodoController {
     @Autowired
     TodoService todoService;
-
-    @GetMapping("/hello")
-    public String hello(){
-        //xử lý logic ...
-        return "hello";
-    }
 
     @GetMapping("/list-todo")
     public String listTodo(Model model) {
         List<Todo> listTodos = todoService.getAllTodo();
         model.addAttribute("listTodos", listTodos);
-        return "listTodo";
+        return "todo/listTodo";
     }
     
     @PostMapping(value = "/add-todo")
