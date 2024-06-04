@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="layouts/main-layout :: main-fragment(~{::title},~{::#product-static-resource},~{::#product-header}, ~{::#product-main-content}, ~{::#product-footer})"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Title of Produt page</title>
+    <th:block id="product-static-resource">
+      <link rel="stylesheet" th:href="@{/css/product.css}">
+    </th:block>
+  </head>
+  <body>
+    <div id="product-header">Header of Product page</div>
+    <div id="product-main-content">
+      <ul>
+        <li>Iphone</li>
+        <li>SamSung</li>
+        <li>Oppo</li>
+      </ul>
+    </div>
+    <div id="product-footer" th:insert="fragments/app-fragments ::footer('Admin ne')"></div>
+  </body>
+</html>

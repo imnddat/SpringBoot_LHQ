@@ -32,25 +32,28 @@ public class App {
 
 		Person p1 = Person.builder().firstName("Dat").lastName("Nguyen").emailAdress("datnd@gmail.com").age(20).build();
 
-		Person p2 = Person.builder().firstName("Tuan").lastName("Hoang").emailAdress("hoangtuan@gmail.com").age(20).build();
+		Person p2 = Person.builder().firstName("Tuan").lastName("Hoang").emailAdress("hoangtuan@gmail.com").age(19)
+				.build();
 
-		listPersons.add(p1);
-		listPersons.add(p2);
-
-		Address address = Address.builder().address("Ha Noi").persons(listPersons).build();
+		Address address = Address.builder().address("Ha Noi").build();
 		p1.setAddress(address);
 		p2.setAddress(address);
+		listPersons.add(p1);
+		listPersons.add(p2);
+		address.setPersons(listPersons);
 		addressRepository.save(address);
-		// personRepository.save(p1);
-		// personRepository.save(p2);
 
-		// List<Person> listPer = personRepository.findAll();
+		List<Person> listPer = personRepository.findAll();
+		for (Person person : listPer) {
+			System.out.println(person.getAddress());
+		}
 
-		// for (Person person : listPer) {
-		// 	System.out.println(person.getAddress());
-		// }
+		List<Address> listAdd = addressRepository.findAll();
+		for (Address a : listAdd) {
+			System.out.println(a.getAddress());
+			System.out.println(a.getPersons());
+		}
 
-		
 	}
 
 }

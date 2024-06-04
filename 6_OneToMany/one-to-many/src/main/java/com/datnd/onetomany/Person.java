@@ -35,6 +35,7 @@ public class Person {
 
     @ManyToOne
     @JoinColumn(name = "address_id")
+    @ToString.Exclude
     private Address address;
 
 }
