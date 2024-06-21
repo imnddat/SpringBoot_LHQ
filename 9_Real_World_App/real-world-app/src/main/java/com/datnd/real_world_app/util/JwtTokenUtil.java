@@ -14,14 +14,14 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
 public class JwtTokenUtil {
-    private final String secret = "DAT_DZ";
+    private final String secret = "QUAN_DZ";
 
-    public String generateToken(User user, Long expiredDate) {
+    public String generateToken(User user, long expiredDate) {
         Map<String, Object> claims = new HashMap<>();
         TokenPayLoad tokenPayLoad = TokenPayLoad.builder().userId(user.getId()).email(user.getEmail()).build();
         claims.put("payload", tokenPayLoad);
         return Jwts.builder().setClaims(claims).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expiredDate * 1000))
-                .signWith(SignatureAlgorithm.HS256, secret).compact();
+                .signWith(SignatureAlgorithm.HS512, secret).compact();
     }
 }
