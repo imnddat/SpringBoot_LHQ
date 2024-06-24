@@ -26,13 +26,16 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf().disable().authorizeRequests().anyRequest().permitAll()
+        httpSecurity.csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(authorize -> authorize
+                                .requestMatchers("/api/users/login").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
+                                .requestMatchers("/api/**").authenticated()
+                                .anyRequest().permitAll()
+                )
+                .sessionManagement(management -> management
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-                .and().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        // .requestMatchers("api/users/login").permitAll()
-        // .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
-        // .requestMatchers("/api/**").authenticated()
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }

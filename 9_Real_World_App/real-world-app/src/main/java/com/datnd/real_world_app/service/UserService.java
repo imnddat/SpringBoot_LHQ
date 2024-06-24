@@ -2,6 +2,7 @@ package com.datnd.real_world_app.service;
 
 import java.util.Map;
 
+import com.datnd.real_world_app.entity.User;
 import com.datnd.real_world_app.exception.custom.CustomBadRequestException;
 import com.datnd.real_world_app.exception.custom.CustomNotFoundException;
 import com.datnd.real_world_app.model.profile.dto.ProfileDTOResponse;
@@ -22,5 +23,7 @@ public interface UserService {
     public Map<String, ProfileDTOResponse> followUser(String username) throws CustomNotFoundException;
 
     public Map<String, ProfileDTOResponse> unfollowUser(String username) throws CustomNotFoundException;
+
+    public User getUserLoggedIn();
     
 }
